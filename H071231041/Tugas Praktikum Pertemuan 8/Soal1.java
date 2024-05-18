@@ -1,7 +1,8 @@
-
 import java.util.Random;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 class TaskTimeHelper {
     private static final Random random = new Random();
@@ -14,10 +15,10 @@ class TaskTimeHelper {
 class Soal01 {
     private static int dataLoadedCount = 0;
     private static int dataFailedCount = 0;
-    private static boolean isSuccess = true;
     private static long startTime;
-    private static int data = 4; // tugas
+    private static final int data = 4; // tugas
     private static long time;
+    private static ConcurrentLinkedQueue<String> messagesQueue = new ConcurrentLinkedQueue<>();
 
     static Runnable runnableForUIThread = new Runnable() {
         @Override
@@ -27,20 +28,23 @@ class Soal01 {
                 time = (System.currentTimeMillis() - startTime) / 1000;
                 if (time > 0) {
                     System.out.println("Loading... (" + time + "s)");
-                    if (isSuccess == false) {
-                        System.out.println("Request Timeout");
+                    String message;
+                    while ((message = messagesQueue.poll()) != null) {
+                        System.out.println(message);
                     }
-                    if (dataLoadedCount + dataFailedCount == data) {
-                        System.out.println();
-                        System.out.println("Task Finish.");
-                        System.out.println("Time Execution : " + time + "s");
-                        if (dataFailedCount > 0) {
-                            System.out.println(dataLoadedCount + " Data Succesfully loaded & " + dataFailedCount
-                                    + " Data failed to load");
-                        } else {
-                            System.out.println("All data is successfully loaded");
+                    synchronized (Soal01.class) {
+                        if (dataLoadedCount + dataFailedCount == data) {
+                            System.out.println();
+                            System.out.println("Task Finish.");
+                            System.out.println("Time Execution : " + time + "s");
+                            if (dataFailedCount > 0) {
+                                System.out.println(dataLoadedCount + " Data Successfully loaded & " + dataFailedCount
+                                        + " Data failed to load");
+                            } else {
+                                System.out.println("All data is successfully loaded");
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
                 try {
@@ -55,24 +59,24 @@ class Soal01 {
     static Runnable runnableForBackgroundThread = new Runnable() {
         public void run() {
             int executionTime = TaskTimeHelper.getRandomExecutionTime();
-            // int executionTime = 2;
+            boolean success = true;
             try {
                 if (executionTime > 4) {
                     Thread.sleep(5000);
-                    // System.out.println("Request Timeout");
-                    isSuccess = false;
+                    success = false;
                 } else {
                     Thread.sleep(executionTime * 1000);
-                    isSuccess = true;
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                success = false;
             }
             synchronized (Soal01.class) {
-                if (isSuccess) {
+                if (success) {
                     dataLoadedCount++;
                 } else {
                     dataFailedCount++;
+                    messagesQueue.add("Request Timeout");
                 }
             }
         }
@@ -91,6 +95,11 @@ class Soal01 {
             executorForBackgroundThread.execute(runnableForBackgroundThread);
         }
         executorForBackgroundThread.shutdown();
+        try {
+            executorForBackgroundThread.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         executorForUIThread.shutdown();
     }
 }
