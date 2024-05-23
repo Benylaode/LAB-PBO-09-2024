@@ -1,13 +1,14 @@
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-// import javax.swing.plaf.nimbus.State;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Main {
-    private static int jumlahData = 4;
+    public static int jumlahData = 4;
     private static int jumlahBot = 3;
-    private static int berhasil;
+    private static int dataGagal;
+    public static int dataBerhasil;
     public static boolean gagal = false;
+    public static ConcurrentLinkedQueue<String> messagesQueue = new ConcurrentLinkedQueue<>();
 
     public static void main(String[] args) {
         System.out.println(String.format("Start Load %d data", jumlahData));
@@ -29,24 +30,27 @@ public class Main {
         }
         ui.stopProgram();
         executorPribadi.shutdown();
-        while(!executorPribadi.isTerminated()){
+        while (!executorPribadi.isTerminated()) {
 
         }
+
         System.out.println();
         System.out.println("Task Finish.");
         System.out.println("Time Execution : " + UiThread.jumlah + "s");
-        
-        if (berhasil == jumlahData) {
+
+        if (dataBerhasil == jumlahData) {
             System.out.println("All Data Is Successfully Loaded");
         } else {
-            int gagal = 4 - berhasil;
-            System.out.println(String.format("%d Data Successfully loaded & %d Data failed to load", berhasil, gagal));
+            int dataGagal = 4 - dataBerhasil;
+            System.out.println(
+                    String.format("%d Data Successfully loaded & %d Data failed to load", dataBerhasil, dataGagal));
 
         }
+
     }
 
     public static synchronized void dataBerhasil() {
-        berhasil++;
+        dataBerhasil++;
     }
 }
 
@@ -54,18 +58,22 @@ class Bot extends Thread {
 
     public void run() {
         int waktuEksesuki = TaskTimeHelper.getTaskExecutionTime();
-        if (waktuEksesuki < 5) {
-            try {
+
+        try {
+            if (waktuEksesuki > 4) {
+                Thread.sleep(5000);
+                Main.gagal = true;
+                Main.messagesQueue.add("Request Timeout");
+            } else {
                 Thread.sleep(waktuEksesuki * 1000);
                 Main.dataBerhasil();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
-        } else {
-           Main.gagal = true;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Main.gagal = true;
         }
-
     }
+
 }
 
 class UiThread extends Thread {
@@ -79,17 +87,18 @@ class UiThread extends Thread {
                 jumlah++;
                 Thread.sleep(1000);
                 System.out.println(String.format("Loading... (%ds)", jumlah));
-                if (Main.gagal){
-                    System.out.println("request time out");
-                    Main.gagal= false;
+                String message;
+                while ((message = Main.messagesQueue.poll()) != null) {
+                    System.out.println(message);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+
     }
 
-    public void stopProgram(){
+    public void stopProgram() {
         yes = false;
     }
 
