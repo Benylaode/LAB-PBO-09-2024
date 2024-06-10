@@ -1,0 +1,19 @@
+package praktikum;
+
+class GermanShepherd extends Dog implements Perpindahan{
+
+    @Override
+    public void move() {
+        position += 3;
+    }
+
+    @Override
+    void describe() {
+        System.out.println("German Shepherd adalah anjing yang kokoh dengan tubuh yang kuat dan otot yang terdefinisi dengan baik.");
+        System.out.println("German Shepherd dikenal karena sifatnya yang cerdas, setia, dan rajin.  ");
+        System.out.println("Posisi German Shepherd sekarang berada di angka "+position);
+        System.out.println("Panjang rata-rata German Shepherd adalah " + averagelength + " cm.");
+        System.out.println()
+    }
+    
+}
