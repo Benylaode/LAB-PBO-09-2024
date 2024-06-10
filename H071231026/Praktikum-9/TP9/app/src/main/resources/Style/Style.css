@@ -1,0 +1,45 @@
+.latar{
+    -fx-background-color: #e044b4;
+    -fx-display : flex;
+    -fx-flex-direction : column;
+    -fx-position: absolute;
+}
+
+.judul{
+    -fx-font-family: "AnticFont";
+    -fx-text-fill: rgb(161, 40, 129);
+    -fx-font-size: 40px;
+}
+
+.button{
+    -fx-font-family: "Baskerville Old Face";
+    -fx-text-fill: rgb(214, 71, 162);
+    -fx-font-size: 20px;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 45px;
+}
+
+.input{
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill: rgb(61, 6, 42);
+    -fx-font-size: 20px;
+}
+
+.tabelInput{
+    -fx-pref-width: 350px;
+    -fx-pref-height: 25px;
+}
+
+.buttonS{
+    -fx-font-family: "Baskerville Old Face";
+    -fx-text-fill: rgb(177, 28, 120);
+    -fx-font-size: 15px;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 20px;
+}
+
+.warning{
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill: rgb(204, 4, 4);
+    -fx-font-size: 15px;
+}
