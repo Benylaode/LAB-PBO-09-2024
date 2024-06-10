@@ -47,16 +47,27 @@ public class PUBG {
 
     public void mulaiPertarungan(PUBG musuh) {
         while (this.health > 0 && musuh.health > 0) {
+<<<<<<< HEAD
             
             this.attack(musuh);
             
             
+=======
+            // Pemain menyerang musuh
+            this.attack(musuh);
+            
+            // Jika musuh masih hidup, musuh menyerang balik
+>>>>>>> 3283e26cefcc7073a810a493a3bdf0c28eea01e0
             if (musuh.health > 0) {
                 musuh.attack(this);
             }
         }
     
+<<<<<<< HEAD
         
+=======
+        // Menentukan hasil pertarungan
+>>>>>>> 3283e26cefcc7073a810a493a3bdf0c28eea01e0
         if (this.health <= 0 && musuh.health <= 0) {
             System.out.println("Pertarungan berakhir imbang!");
         } else if (this.health <= 0) {
@@ -70,6 +81,7 @@ public class PUBG {
     public void attack(PUBG target) {
         int kerusakanYangDiberikan = this.damage - target.weaponAndArmor.getArmor();
         if (kerusakanYangDiberikan < 0) {
+<<<<<<< HEAD
             kerusakanYangDiberikan = 0; 
         }
         target.health -= kerusakanYangDiberikan;
@@ -80,6 +92,20 @@ public class PUBG {
         this.setHealth(this.health);
         
         
+=======
+            kerusakanYangDiberikan = 0; // Pastikan kerusakan yang diberikan minimal 0
+        }
+        target.health -= kerusakanYangDiberikan;
+        if (target.health < 0) {
+            target.health = 0; // Pastikan kesehatan tidak negatif
+        }
+        // System.out.println(this.name + " menyerang " + target.name + " dan menyebabkan kerusakan sebesar " + kerusakanYangDiberikan + ".");
+        
+        // Perbarui kesehatan pemain yang menyerang
+        this.setHealth(this.health);
+        
+        // Tambahkan kondisi untuk menghentikan perulangan jika salah satu pemain kehabisan kesehatan
+>>>>>>> 3283e26cefcc7073a810a493a3bdf0c28eea01e0
         if (this.health <= 0 || target.health <= 0) {
             return;
         }
