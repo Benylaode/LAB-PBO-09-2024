@@ -1,4 +1,4 @@
-package praktikum;
+package praktikum_6;
 
 public class Car implements Perpindahan {
     int totalForwardGear, maxSpeed;
