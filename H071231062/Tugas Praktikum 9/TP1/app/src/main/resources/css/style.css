@@ -1,0 +1,114 @@
+#layarutama {
+    -fx-background-color: transparent;
+}
+
+#background-video {
+    -fx-fit-width: 100%;
+    -fx-fit-height: 100%;
+    -fx-preserve-ratio: false;
+}
+
+
+#masukprofile{
+    -fx-font-size: 34px;
+    -fx-text-fill:#386997; 
+    -fx-background-color:transparent;
+    -fx-padding:0;
+    -fx-text-decoration: underline;
+    -fx-font-weight: bold;
+}
+
+#masukprofile:hover{
+    -fx-text-fill:#888888;
+}
+
+
+#garis {
+    -fx-font-size: 34px;
+    -fx-text-fill:#386997; 
+}
+
+
+#logout {
+    -fx-background-image: url('/pic/logout.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
+}
+
+#logout:hover {
+    -fx-background-image: url('/pic/logout2.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
+}
+
+
+#person1 {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-background-radius: 25;    /* Corner radius */
+}
+
+#profil1 {
+    -fx-background-image: url('/pic/eather.jpg');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-radius: 75; /* Radius untuk membuat tombol berbentuk bulat */
+    -fx-shape: "M 0 75 A 75 75 0 1 1 150 75 A 75 75 0 1 1 0 75"; /* Bentuk lingkaran menggunakan SVG path */
+    -fx-pref-width: 150px; /* Lebar tombol */
+    -fx-pref-height: 150px; /* Tinggi tombol */
+    -fx-border-radius: 75; /* Radius untuk border */
+}
+#profil1:hover{
+    -fx-background-image: url('/pic/lumine.jpg');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-radius: 75; /* Radius untuk membuat tombol berbentuk bulat */
+    -fx-shape: "M 0 75 A 75 75 0 1 1 150 75 A 75 75 0 1 1 0 75"; /* Bentuk lingkaran menggunakan SVG path */
+    -fx-pref-width: 150px; /* Lebar tombol */
+    -fx-pref-height: 150px; /* Tinggi tombol */
+    -fx-border-radius: 75; /* Radius untuk border */
+}
+
+
+
+
+
+#profil2 {
+    -fx-background-image: url('/pic/lumine.jpg');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-radius: 75; /* Radius untuk membuat tombol berbentuk bulat */
+    -fx-shape: "M 0 75 A 75 75 0 1 1 150 75 A 75 75 0 1 1 0 75"; /* Bentuk lingkaran menggunakan SVG path */
+    -fx-pref-width: 150px; /* Lebar tombol */
+    -fx-pref-height: 150px; /* Tinggi tombol */
+    -fx-border-radius: 75; /* Radius untuk border */
+}
+
+#profil2:hover{
+    -fx-background-image: url('/pic/eather.jpg');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-radius: 75; /* Radius untuk membuat tombol berbentuk bulat */
+    -fx-shape: "M 0 75 A 75 75 0 1 1 150 75 A 75 75 0 1 1 0 75"; /* Bentuk lingkaran menggunakan SVG path */
+    -fx-pref-width: 150px; /* Lebar tombol */
+    -fx-pref-height: 150px; /* Tinggi tombol */
+    -fx-border-radius: 75; /* Radius untuk border */
+}
+
+
+#info {
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+
+    -fx-background-radius:25;
+}
+
+#layarkiri{
+    -fx-background-color: rgba(84, 141, 187, 0.5);
+}
+
+
+
+
