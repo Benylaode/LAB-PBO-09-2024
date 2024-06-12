@@ -1,0 +1,9 @@
+#layout {
+  -fx-padding: 100;
+  -fx-alignment: center;
+  -fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+}
+
+#nameLabel {
+  -fx-font-color: white;
+}
